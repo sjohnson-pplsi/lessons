@@ -10,7 +10,19 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.config({
+    extends: ["next/core-web-vitals", "next/typescript"],
+    rules: {
+      "import/no-internal-modules": [
+        "off",
+        {
+          allow: [
+            "**/index.ts", // Allow imports from barrel files
+          ],
+        },
+      ],
+    },
+  }),
 ];
 
 export default eslintConfig;

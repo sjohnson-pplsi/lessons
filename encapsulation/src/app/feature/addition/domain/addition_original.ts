@@ -4,12 +4,12 @@ export class AdditionOriginal {
   total = 0;
 
   increment1() {
-    this.a += 1;
-    this.total = this.a + this.b;
+    this.a = 1;
+    this.total = this.a;
   }
 
   increment2() {
-    this.b += 2;
-    this.total = this.a + this.b;
+    this.b = 2;
+    this.total = this.b;
   }
 }

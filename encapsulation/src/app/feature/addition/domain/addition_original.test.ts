@@ -9,6 +9,8 @@ describe("AdditionOriginal", () => {
     expect(addition.total).toBe(0);
   });
 
+  // Is this complete?
+  // What if we run it twice?
   it("should increment1", () => {
     const addition = new AdditionOriginal();
     addition.increment1();
@@ -16,14 +18,10 @@ describe("AdditionOriginal", () => {
     expect(addition.a).toBe(1);
     expect(addition.b).toBe(0);
     expect(addition.total).toBe(1);
-
-    addition.increment1();
-
-    expect(addition.a).toBe(2);
-    expect(addition.b).toBe(0);
-    expect(addition.total).toBe(2);
   });
 
+  // Is this complete?
+  // What if we run it twice?
   it("should increment2", () => {
     const addition = new AdditionOriginal();
     addition.increment2();
@@ -31,23 +29,10 @@ describe("AdditionOriginal", () => {
     expect(addition.a).toBe(0);
     expect(addition.b).toBe(2);
     expect(addition.total).toBe(2);
-
-    addition.increment2();
-
-    expect(addition.a).toBe(0);
-    expect(addition.b).toBe(4);
-    expect(addition.total).toBe(4);
   });
 
-  it("should increment1 and increment2", () => {
-    const addition = new AdditionOriginal();
-    addition.increment1();
-    addition.increment2();
-
-    expect(addition.a).toBe(1);
-    expect(addition.b).toBe(2);
-    expect(addition.total).toBe(3);
-  });
+  // Is this complete?
+  // What if we run increment1 then increment2?
 
   // Why???
   // Why can you do this???

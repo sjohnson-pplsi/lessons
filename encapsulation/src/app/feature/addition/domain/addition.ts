@@ -1,16 +1,15 @@
 export class Addition {
-  #a = 0;
-  #b = 0;
+  #total = 0;
 
   increment1() {
-    this.#a++;
+    this.#total += 1;
   }
 
   increment2() {
-    this.#b += 2;
+    this.#total += 2;
   }
 
   get total() {
-    return this.#a + this.#b;
+    return this.#total;
   }
 }

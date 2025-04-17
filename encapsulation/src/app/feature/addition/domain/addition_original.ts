@@ -5,11 +5,11 @@ export class AdditionOriginal {
 
   increment1() {
     this.a += 1;
-    this.total += 1;
+    this.total = this.a + this.b;
   }
 
   increment2() {
     this.b += 2;
-    this.total += 2;
+    this.total = this.a + this.b;
   }
 }

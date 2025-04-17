@@ -16,6 +16,12 @@ describe("AdditionOriginal", () => {
     expect(addition.a).toBe(1);
     expect(addition.b).toBe(0);
     expect(addition.total).toBe(1);
+
+    addition.increment1();
+
+    expect(addition.a).toBe(2);
+    expect(addition.b).toBe(0);
+    expect(addition.total).toBe(2);
   });
 
   it("should increment2", () => {
@@ -25,9 +31,14 @@ describe("AdditionOriginal", () => {
     expect(addition.a).toBe(0);
     expect(addition.b).toBe(2);
     expect(addition.total).toBe(2);
+
+    addition.increment2();
+
+    expect(addition.a).toBe(0);
+    expect(addition.b).toBe(4);
+    expect(addition.total).toBe(4);
   });
 
-  // Redundant but valid
   it("should increment1 and increment2", () => {
     const addition = new AdditionOriginal();
     addition.increment1();

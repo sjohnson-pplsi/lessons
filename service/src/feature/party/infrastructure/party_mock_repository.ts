@@ -2,15 +2,27 @@ import { PartyRepository } from "../application";
 import { Party, PartyId } from "../domain";
 
 export class PartyMockRepository implements PartyRepository {
-  createParty(party: Party): Promise<void> {
-    throw new Error("Method not implemented.");
+  private data: Record<PartyId, Party> = {};
+
+  async createParty(party: Party): Promise<void> {
+    this.data[party.id] = party;
   }
 
-  getParty(id: PartyId): Promise<Party> {
-    throw new Error("Method not implemented.");
+  async getParty(id: PartyId): Promise<Party> {
+    const party = this.data[id];
+    if (!party) {
+      throw new Error("not found");
+    }
+
+    return party;
   }
 
-  replaceParty(id: PartyId, party: Party): Promise<void> {
-    throw new Error("Method not implemented.");
+  async replaceParty(id: PartyId, party: Party): Promise<void> {
+    const old = this.data[id];
+    if (!old) {
+      throw new Error("not found");
+    }
+
+    this.data[id] = party;
   }
 }

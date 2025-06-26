@@ -2,10 +2,28 @@ import express, { Express } from "express";
 import bodyParser from "body-parser";
 import { object, string } from "yup";
 
-import { PartyService } from "../application";
+import { InvitationService, PartyService } from "../application";
 
-export function newPartyController(app: Express, partyService: PartyService) {
+export function newPartyController(
+  app: Express,
+  partyService: PartyService,
+  invitationService: InvitationService
+) {
   const router = express.Router();
+
+  router.get("/", async (req, res, next) => {
+    try {
+      const list = await partyService.list();
+      res.json({
+        data: list.map(({ id, name }) => ({
+          id,
+          name,
+        })),
+      });
+    } catch (err) {
+      next(err);
+    }
+  });
 
   router.get("/:id", async (req, res, next) => {
     try {
@@ -22,13 +40,30 @@ export function newPartyController(app: Express, partyService: PartyService) {
     }
   });
 
+  router.get("/:id/invitations", async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const list = await invitationService.list(id);
+      res.json({
+        data: list.map(({ id, email }) => ({
+          id,
+          email,
+        })),
+      });
+    } catch (err) {
+      next(err);
+    }
+  });
+
   const createPartySchema = object({
     name: string().required(),
   });
 
   router.post("/", bodyParser.json(), async (req, res, next) => {
     try {
-      const { name } = await createPartySchema.validate(req.body);
+      const { name } = await createPartySchema.validate(req.body, {
+        abortEarly: false,
+      });
       const id = await partyService.createParty(name);
       res.json({ id });
     } catch (err) {
@@ -43,7 +78,9 @@ export function newPartyController(app: Express, partyService: PartyService) {
   router.put("/:id", bodyParser.json(), async (req, res, next) => {
     try {
       const { id } = req.params;
-      const { name } = await changePartyNameSchema.validate(req.body);
+      const { name } = await changePartyNameSchema.validate(req.body, {
+        abortEarly: false,
+      });
       await partyService.changeName(id, name);
       res.json({});
     } catch (err) {

@@ -27,7 +27,7 @@ function init() {
     invitationRepository
   );
 
-  newPartyController(app, partyService);
+  newPartyController(app, partyService, invitationService);
   newInvitationController(app, invitationService);
   newIndexController(app);
 }

@@ -1,12 +1,19 @@
 import { InvitationRepository } from "../application";
-import { Invitation, InvitationId } from "../domain";
+import { Invitation, InvitationId, Party, PartyId } from "../domain";
 
 export class InvitationMockRepository implements InvitationRepository {
   private data: Record<InvitationId, InvitationModel> = {};
 
+  async list(partyId: PartyId): Promise<Invitation[]> {
+    return Object.values(this.data)
+      .filter((row) => row.partyId)
+      .map(({ id, partyId, email }) => Invitation.restore(id, partyId, email));
+  }
+
   async createInvitation(invitation: Invitation): Promise<void> {
     this.data[invitation.id] = new InvitationModel(
       invitation.id,
+      invitation.partyId,
       invitation.email
     );
   }
@@ -17,7 +24,7 @@ export class InvitationMockRepository implements InvitationRepository {
       throw new Error("not found");
     }
 
-    return Invitation.restore(row.id, row.email);
+    return Invitation.restore(row.id, row.partyId, row.email);
   }
 
   async replaceInvitation(
@@ -29,10 +36,18 @@ export class InvitationMockRepository implements InvitationRepository {
       throw new Error("not found");
     }
 
-    this.data[id] = new InvitationModel(id, invitation.email);
+    this.data[id] = new InvitationModel(
+      id,
+      invitation.partyId,
+      invitation.email
+    );
   }
 }
 
 class InvitationModel {
-  constructor(public id: string, public email: string) {}
+  constructor(
+    public id: string,
+    public partyId: string,
+    public email: string
+  ) {}
 }

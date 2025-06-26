@@ -5,6 +5,10 @@ import { PartyRepository } from "./party_repository";
 export class PartyService {
   constructor(private partyRepository: PartyRepository) {}
 
+  async list() {
+    return this.partyRepository.list();
+  }
+
   async getParty(id: PartyId) {
     return this.partyRepository.getParty(id);
   }

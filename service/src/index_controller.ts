@@ -1,8 +1,18 @@
 import { ErrorRequestHandler, Express } from "express";
+import { ValidationError } from "yup";
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   if ("message" in err) {
-    res.status(500).json({ error: err.message });
+    if (err instanceof ValidationError) {
+      res.status(500).json({
+        error: {
+          message: "validation error",
+          errors: err.errors,
+        },
+      });
+    } else {
+      res.status(500).json({ error: err.message });
+    }
   } else {
     res.status(500).json({ error: err });
   }

@@ -8,13 +8,17 @@ export class InvitationService {
     private invitationRepository: InvitationRepository
   ) {}
 
+  async list(partyId: PartyId) {
+    return this.invitationRepository.list(partyId);
+  }
+
   async getInvitation(id: InvitationId) {
     return this.invitationRepository.getInvitation(id);
   }
 
   async createInvitation(partyId: PartyId, email: Email) {
     await this.partyRepository.getParty(partyId);
-    const invitation = new Invitation(email);
+    const invitation = new Invitation(partyId, email);
     await this.invitationRepository.createInvitation(invitation);
     return invitation.id;
   }

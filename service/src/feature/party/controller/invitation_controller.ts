@@ -33,7 +33,10 @@ export function newInvitationController(
   router.post("/", bodyParser.json(), async (req, res, next) => {
     try {
       const { partyId, email } = await createInvitationSchema.validate(
-        req.body
+        req.body,
+        {
+          abortEarly: false,
+        }
       );
       const id = await invitationService.createInvitation(partyId, email);
       res.json({ id });
@@ -49,7 +52,9 @@ export function newInvitationController(
   router.put("/:id", bodyParser.json(), async (req, res, next) => {
     try {
       const { id } = req.params;
-      const { email } = await changeEmailSchema.validate(req.body);
+      const { email } = await changeEmailSchema.validate(req.body, {
+        abortEarly: false,
+      });
       await invitationService.changeEmail(id, email);
       res.json({});
     } catch (err) {

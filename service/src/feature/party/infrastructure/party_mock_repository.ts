@@ -4,6 +4,12 @@ import { Party, PartyId } from "../domain";
 export class PartyMockRepository implements PartyRepository {
   private data: Record<PartyId, PartyModel> = {};
 
+  async list(): Promise<Party[]> {
+    return Object.values(this.data).map(({ id, name }) =>
+      Party.restore(id, name)
+    );
+  }
+
   async createParty(party: Party): Promise<void> {
     this.data[party.id] = new PartyModel(party.id, party.name);
   }

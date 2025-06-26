@@ -1,12 +1,11 @@
 {
   "name": "service",
   "version": "0.0.0",
-  "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest",
-    "start": "tsc --watch",
+    "start": "ts-node ./src/index.ts",
     "build": "tsc",
     "clean": "tsc --build --clean",
     "prepublishOnly": "tsc --build --clean && tsc"
@@ -15,9 +14,11 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/express": "^5.0.3",
     "@types/jest": "^30.0.0",
     "jest": "^30.0.3",
     "ts-jest": "^29.4.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
   "jest": {
@@ -25,5 +26,10 @@
     "testPathIgnorePatterns": [
       "<rootDir>/dist/"
     ]
+  },
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "express": "^5.1.0",
+    "yup": "^1.6.1"
   }
 }

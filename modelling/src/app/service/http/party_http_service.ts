@@ -18,6 +18,9 @@ export class PartyHttpService implements PartyService {
     return callService(() =>
       fetch(`http://localhost:3001/party`, {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ name }),
       })
     );
@@ -27,6 +30,9 @@ export class PartyHttpService implements PartyService {
     return callService(() =>
       fetch(`http://localhost:3001/party/${partyId}`, {
         method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ name }),
       })
     );

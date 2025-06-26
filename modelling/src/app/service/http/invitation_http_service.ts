@@ -22,6 +22,9 @@ export class InvitationHttpService implements InvitationService {
     return callService(() =>
       fetch(`http://localhost:3001/invitation`, {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ email }),
       })
     );
@@ -31,6 +34,9 @@ export class InvitationHttpService implements InvitationService {
     return callService(() =>
       fetch(`http://localhost:3001/invitation/${invitationId}`, {
         method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ email }),
       })
     );

@@ -7,6 +7,9 @@
       "path": "modelling"
     },
     {
+      "path": "service"
+    },
+    {
       "name": "root",
       "path": "."
     }
@@ -19,7 +22,9 @@
       "**/CVS": true,
       "**/.DS_Store": true,
       "**/Thumbs.db": true,
-      "encapsulation": true
+      "encapsulation": true,
+      "modelling": true,
+      "service": true
     }
   }
 }

@@ -20,4 +20,10 @@ export class Party {
   changeName(name: PartyName) {
     this.#name = name;
   }
+
+  static restore(id: PartyId, name: PartyName) {
+    const party = new Party(name);
+    party.#id = id;
+    return party;
+  }
 }

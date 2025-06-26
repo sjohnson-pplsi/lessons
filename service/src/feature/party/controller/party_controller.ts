@@ -11,7 +11,12 @@ export function newPartyController(app: Express, partyService: PartyService) {
     try {
       const { id } = req.params;
       const party = await partyService.getParty(id);
-      res.json({ party });
+      res.json({
+        party: {
+          id: party.id,
+          name: party.name,
+        },
+      });
     } catch (err) {
       next(err);
     }

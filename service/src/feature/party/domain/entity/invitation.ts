@@ -20,4 +20,10 @@ export class Invitation {
   changeEmail(email: Email) {
     this.#email = email;
   }
+
+  static restore(id: InvitationId, email: Email) {
+    const invitation = new Invitation(email);
+    invitation.#id = id;
+    return invitation;
+  }
 }

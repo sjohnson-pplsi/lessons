@@ -14,7 +14,12 @@ export function newInvitationController(
     try {
       const { id } = req.params;
       const invitation = await invitationService.getInvitation(id);
-      res.json({ invitation });
+      res.json({
+        invitation: {
+          id: invitation.id,
+          email: invitation.email,
+        },
+      });
     } catch (err) {
       next(err);
     }

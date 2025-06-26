@@ -2,19 +2,22 @@ import { InvitationRepository } from "../application";
 import { Invitation, InvitationId } from "../domain";
 
 export class InvitationMockRepository implements InvitationRepository {
-  private data: Record<InvitationId, Invitation> = {};
+  private data: Record<InvitationId, InvitationModel> = {};
 
   async createInvitation(invitation: Invitation): Promise<void> {
-    this.data[invitation.id] = invitation;
+    this.data[invitation.id] = new InvitationModel(
+      invitation.id,
+      invitation.email
+    );
   }
 
   async getInvitation(id: InvitationId): Promise<Invitation> {
-    const invitation = this.data[id];
-    if (!invitation) {
+    const row = this.data[id];
+    if (!row) {
       throw new Error("not found");
     }
 
-    return invitation;
+    return Invitation.restore(row.id, row.email);
   }
 
   async replaceInvitation(
@@ -26,6 +29,10 @@ export class InvitationMockRepository implements InvitationRepository {
       throw new Error("not found");
     }
 
-    this.data[id] = invitation;
+    this.data[id] = new InvitationModel(id, invitation.email);
   }
+}
+
+class InvitationModel {
+  constructor(public id: string, public email: string) {}
 }

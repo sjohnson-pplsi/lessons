@@ -7,16 +7,16 @@ import {
 
 export class PartyHttpService implements PartyService {
   list(): Promise<ListPartiesResponse> {
-    return callService(() => fetch(`localhost:3001/party`));
+    return callService(() => fetch(`http://localhost:3001/party`));
   }
 
   getParty(partyId: string): Promise<GetIPartyResponse> {
-    return callService(() => fetch(`localhost:3001/party/${partyId}`));
+    return callService(() => fetch(`http://localhost:3001/party/${partyId}`));
   }
 
   createParty(name: string): Promise<string> {
     return callService(() =>
-      fetch(`localhost:3001/party`, {
+      fetch(`http://localhost:3001/party`, {
         method: "POST",
         body: JSON.stringify({ name }),
       })
@@ -25,7 +25,7 @@ export class PartyHttpService implements PartyService {
 
   changePartyName(partyId: string, name: string): Promise<void> {
     return callService(() =>
-      fetch(`localhost:3001/party/${partyId}`, {
+      fetch(`http://localhost:3001/party/${partyId}`, {
         method: "PUT",
         body: JSON.stringify({ name }),
       })

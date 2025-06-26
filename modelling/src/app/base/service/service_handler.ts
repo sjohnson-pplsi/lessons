@@ -32,9 +32,7 @@ export async function handleResponse<T>(query: Promise<Response>): Promise<T> {
     throw await parseError(response);
   }
 
-  const result = await response.json();
-
-  return result.data;
+  return response.json();
 }
 
 async function parseError(response: Response): Promise<Error> {

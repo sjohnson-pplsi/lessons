@@ -1,4 +1,6 @@
 import express from "express";
+import cors from "cors";
+
 import {
   newInvitationController,
   newPartyController,
@@ -27,6 +29,7 @@ function init() {
     invitationRepository
   );
 
+  app.use(cors());
   newPartyController(app, partyService, invitationService);
   newInvitationController(app, invitationService);
   newIndexController(app);

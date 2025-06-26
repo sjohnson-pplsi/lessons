@@ -8,19 +8,19 @@ import {
 export class InvitationHttpService implements InvitationService {
   list(partyId: string): Promise<ListInvitationsResponse> {
     return callService(() =>
-      fetch(`localhost:3001/party/${partyId}/invitation`)
+      fetch(`http://localhost:3001/party/${partyId}/invitation`)
     );
   }
 
   getInvitation(invitationId: string): Promise<GetInvitationResponse> {
     return callService(() =>
-      fetch(`localhost:3001/invitation/${invitationId}`)
+      fetch(`http://localhost:3001/invitation/${invitationId}`)
     );
   }
 
   createInvitation(partyId: string, email: string): Promise<string> {
     return callService(() =>
-      fetch(`localhost:3001/invitation`, {
+      fetch(`http://localhost:3001/invitation`, {
         method: "POST",
         body: JSON.stringify({ email }),
       })
@@ -29,7 +29,7 @@ export class InvitationHttpService implements InvitationService {
 
   changeEmail(invitationId: string, email: string): Promise<void> {
     return callService(() =>
-      fetch(`localhost:3001/invitation/${invitationId}`, {
+      fetch(`http://localhost:3001/invitation/${invitationId}`, {
         method: "PUT",
         body: JSON.stringify({ email }),
       })

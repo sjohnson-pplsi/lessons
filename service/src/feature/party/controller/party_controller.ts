@@ -40,7 +40,7 @@ export function newPartyController(
     }
   });
 
-  router.get("/:id/invitations", async (req, res, next) => {
+  router.get("/:id/invitation", async (req, res, next) => {
     try {
       const { id } = req.params;
       const list = await invitationService.list(id);

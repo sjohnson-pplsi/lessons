@@ -6,7 +6,7 @@ export class InvitationMockRepository implements InvitationRepository {
 
   async list(partyId: PartyId): Promise<Invitation[]> {
     return Object.values(this.data)
-      .filter((row) => row.partyId)
+      .filter((row) => row.partyId === partyId)
       .map(({ id, partyId, email }) => Invitation.restore(id, partyId, email));
   }
 
